@@ -4,14 +4,13 @@ const removeTransition = (e) => {
 }
 
 const playSound = (e) => {
-	const audio = document.querySelector(`audio[data-key="${e.keyCode}"`);
-	const key = document.querySelector(`div[data-key="${e.keyCode}"`);
-	if (!audio) return;
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
 
-	key.classList.add('playing');
-
-	audio.currentTime() = 0; // rewind audio
-	audio.play();
+    key.classList.add('playing');
+    audio.currentTime = 0; //rewind audio
+    audio.play();
 }
 
 const keys = Array.from(document.querySelectorAll('.key'));
