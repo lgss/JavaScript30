@@ -2,6 +2,7 @@ html {
   font-size: 10px;
   background: url(http://i.imgur.com/b9r5sEL.jpg) bottom center;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 body,html {
   margin: 0;
@@ -47,4 +48,13 @@ kbd {
   text-transform: uppercase;
   letter-spacing: .1rem;
   color: #ffc600;
+}
+
+.titleHeading {
+  background-color: rgba(255, 255, 255, 0.3); 
+  font-family: 'Quicksand', sans-serif;
+  font-size: 100px;
+  font-weight: 300;
+  margin: 0;
+  text-align: center;
 }
