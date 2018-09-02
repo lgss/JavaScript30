@@ -74,7 +74,11 @@
     const sHand = document.querySelector('.second-hand');
     const mHand = document.querySelector('.min-hand');
     const hHand = document.querySelector('.hour-hand');
-    
+
+    var totalSecondRotations = 0;
+    var totalMinuteRotations = 0;
+    var   totalHourRotations = 0;
+
     function setDate() {
       const now = new Date();
 
@@ -82,10 +86,21 @@
       const minutes = now.getMinutes();
       const hours   = now.getHours();
       
-      const secondDegs = (seconds/60)*360 + 90;
-      const minuteDegs = (minutes/60)*360 + 90;
-      const hourDegs   = (  hours/12)*360 + 90;
-      
+      var secondDegs = (seconds/60)*360 + 90;
+      var minuteDegs = (minutes/60)*360 + 90;
+      var hourDegs   = (  hours/12)*360 + 90;
+
+      if(secondDegs%360 == 90)
+        totalSecondRotations++;
+      if(minuteDegs%360 == 90)
+        totalMinuteRotations++;
+      if(hourDegs%360 == 90)
+        totalHourRotations++;
+
+      secondDegs += (360*totalSecondRotations);
+      minuteDegs += (360*totalMinuteRotations)
+      hourDegs += (360*totalHourRotations)
+
       sHand.style.transform = 'rotate(' + secondDegs + 'deg)';
       mHand.style.transform = 'rotate(' + minuteDegs + 'deg)';
       hHand.style.transform = 'rotate(' +   hourDegs + 'deg)';
