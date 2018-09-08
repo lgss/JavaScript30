@@ -26,15 +26,56 @@
 
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19 or older?
-    // Array.prototype.every() // is everyone 19 or older?
+    const isAdultV1 = people.some(function(person){
+      const currentYear = (new Date()).getFullYear();
+      if (currentYear - person.year >= 19) {
+        return true;
+      }
+    });
+    console.log({isAdultV1});
 
+    const isAdultV2 = people.some(person => {
+      const currentYear = (new Date()).getFullYear();
+      return currentYear - person.year >= 19;
+    });
+    console.log({isAdultV2});
+
+    const isAdultV3 = people.some(person =>
+      ((new Date()).getFullYear()) - person.year >= 19
+    );
+    console.log({isAdultV3});
+
+    // Array.prototype.every() // is everyone 19 or older?
+    const allAdults = people.every(person =>
+      ((new Date()).getFullYear()) - person.year >= 19
+    );
+    console.log({allAdults});
     // Array.prototype.find()
     // Find is like filter, but instead returns just the one you are looking for
     // find the comment with the ID of 823423
+    const commentV1 = comments.find(function(comment) {
+      if (comment.id === 823423) {
+        return true;
+      }
+    });
+    console.log(commentV1);
+
+    const commentV2 = comments.find(comment => comment.id === 823423);
+    console.log(commentV2);
 
     // Array.prototype.findIndex()
     // Find the comment with this ID
     // delete the comment with the ID of 823423
+    const index = comments.findIndex(comment => comment.id === 823423);
+    console.log(index);
+    // updates the exisitng array
+    comments.splice(index,1);
+
+    // creates a new array so that the old one can still be referenced
+    const newComments = [
+      ...comments.slice(0,index),
+      ...comments.slice(index + 1)
+    ];
 
   </script>
 </body>
