@@ -7,6 +7,44 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+
+const canvas = document.querySelector('#draw');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+ctx.lineJoin = 'round';
+ctx.lineCap = 'round';
+ctx.lineWidth = 30;
+
+let isDrawing = false;
+let last = (0,0);
+let hue = Math.floor(Math.random() * Math.floor(360));              //start on a random colour
+let direction = true;
+
+function draw(e) {
+  last = [ e.offsetX, e.offsetY ]
+  hue++;                                                            // colour keeps changing even not drawing
+  hue %= 360;
+  
+  if (!isDrawing) { return }                                        // can't do returns in conditional operator :(
+
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+  
+  ctx.beginPath();
+  ctx.moveTo(...last);                                              
+  ctx.lineTo(e.offsetX, e.offsetY);
+  ctx.stroke();
+
+  (ctx.lineWidth >= 100 || ctx.lineWidth <= 1) ? direction = !direction : null;
+  direction ? ctx.lineWidth ++ : ctx.lineWidth--;
+
+}
+
+canvas.addEventListener('mousemove',  draw);
+canvas.addEventListener('mousedown',  () => isDrawing = true);
+canvas.addEventListener('mouseup',    () => isDrawing = false);
+canvas.addEventListener('mouseout',   () => isDrawing = false);
+
 </script>
 
 <style>
