@@ -99,6 +99,25 @@
   </div>
 
 <script>
+
+let isShift = false;
+let lastClicked
+const items = [...document.querySelectorAll('.item input')]                               //spread nodelist to array to get access to forEach
+
+document.addEventListener('keydown', (e) => e.key === 'Shift' ? isShift = true  : null);
+document.addEventListener('keyup'  , (e) => e.key === 'Shift' ? isShift = false : null);
+
+function itemClicked (e) { 
+  if (isShift ) {                                                   //
+    let range = [items.indexOf(lastClicked),items.indexOf(this)].sort((a, b) => a - b)     //find the range by sorting the indicies of the current checkbox and the last checkbox
+    range[1]++                                                                             //add 1 to the end because it will be used in slice and we want to to stop
+    items.slice(...range).forEach(item => item.checked = this.checked)                     //slice all items by the spread of the range to get the betweens, then check or uncheck them
+  }
+  lastClicked = this
+}
+
+items.forEach(item => item.addEventListener('click',itemClicked))
+
 </script>
 </body>
 </html>
