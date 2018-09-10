@@ -18,28 +18,52 @@
     }
 
     // Regular
-
+    console.log("Hello World")
     // Interpolated
-
+    console.log("I am a %s string",'little')
     // Styled
-
+    console.log("I am a %c %s %c string", 'font-size:50px', 'thicc','font-size:12px')
     // warning!
+    console.warn('String thiccness reaching unacceptable limits')
 
     // Error :|
+    console.error('You were crushed to death by a string')
 
     // Info
+    console.info(`This doesn't give a nice icon in chrome`);
 
     // Testing
-
+    1===2 ? null : console.error("foo")
+    console.assert((1===2), 'Bar')
     // clearing
 
+    //console.clear()
+
     // Viewing DOM Elements
+    const a = document.querySelector('p');
+    console.dir(a);
 
     // Grouping together
-
+    console.groupCollapsed("Stuff");
+    console.log("Some stuff goes in here");
+    console.groupCollapsed("Overlapping stuff")
+    console.log("and some more here");
+    console.log("which goes in a subgroup")
+    console.groupEnd();
+    console.log("and then some more on the end");
+    console.groupEnd();
     // counting
 
+    console.count("foo");
+    console.count("bar");
+    console.count("foo");
+
     // timing
+    console.time("adding")
+    let sum = 0;
+    for (i = 0; i < 10000; i++) {sum += i}
+    console.log(sum);
+    console.timeEnd("adding")
 
   </script>
 </body>
