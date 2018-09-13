@@ -43,21 +43,20 @@
   </div>
 
   <script>
-    function debounce(func, wait = 20, immediate = true) {
-      var timeout;
-      return function() {
-        var context = this, args = arguments;
-        var later = function() {
-          timeout = null;
-          if (!immediate) func.apply(context, args);
-        };
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-      };
+    const images = document.querySelectorAll('.slide-in')
+    function handleIntersect(entries,observer) {
+      entries.forEach( entry => entry.intersectionRatio > 0.5 ? 
+          entry.target.classList.add('active')
+        : (entry.target.classList.remove('active'))
+      )
     }
-
+    var observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: [0.1,0.5]
+    } 
+    var observer = new IntersectionObserver(handleIntersect,observerOptions)
+    images.forEach(image => observer.observe(image))
   </script>
 
   <style>
