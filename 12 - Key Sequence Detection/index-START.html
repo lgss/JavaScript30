@@ -7,6 +7,15 @@
 </head>
 <body>
 <script>
+let userCode   = ""
+const secretCode = "Beetlejuice"
+
+function keyCode(e) {
+  e.key.length === 1 ?  userCode += e.key : null;
+  userCode.length > secretCode.length ? userCode = userCode.substr(1) : null;
+  userCode === secretCode ? (alert("Don't say his name"),cornify_add()) : null;
+}
+window.addEventListener('keyup', keyCode);
 </script>
 </body>
 </html>
