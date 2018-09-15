@@ -23,12 +23,92 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <div>
+      <button onclick="checkAll()">Check All</button>
+      <button onclick="uncheckAll()">Uncheck All</button>
+      <button onclick="deleteList()">Delete List</button>
+    </div> 
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem('items')) || [];
+
+  function checkAll() {
+    items.forEach(item => {
+      item.done = true;
+    });
+    populateList(items, itemsList);
+    localStorage.setItem('items',JSON.stringify(items));
+  }
+
+  function uncheckAll() {
+    items.forEach(item => {
+      item.done = false;
+    });
+    populateList(items, itemsList);
+    localStorage.setItem('items',JSON.stringify(items));
+  }
+
+  function deleteList() {
+    //Remove items from list
+    while(items.length > 0) {
+      items.pop();
+    }
+    //Add input to the items list
+    populateList(items, itemsList);
+    //Save item into local storage
+    localStorage.setItem('items',JSON.stringify(items))
+  }
+  
+  function addItem(e) {
+    //Stops page reloading on form submission
+    e.preventDefault();
+    //Gets the value of the input
+    const text = (this.querySelector('[name=item]')).value;
+
+    const item = {
+      text, //ES6 shortcut property
+      done: false
+    }
+    //Add input to item list
+    items.push(item);
+    //Add input to the items list
+    populateList(items, itemsList);
+    //Save item into local storage
+    localStorage.setItem('items',JSON.stringify(items));
+    //Resets the input of the form input
+    this.reset();  
+  }
+
+  function populateList(plates = [], platesList) {
+    platesList.innerHTML = plates.map((plate, i) => {
+      return `
+        <li>
+          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? 'checked' : ''} />
+          <label for="item${i}">${plate.text}</label>
+        </li>
+      `;
+    }).join('');
+  }
+
+  function toggleDone(e) {
+    if(!e.target.matches('input')) return; //skip unless its the input
+    const el = e.target;
+    const index = el.dataset.index;
+    //Change the done property
+    items[index].done = !items[index].done;
+    //Update local storage
+    localStorage.setItem('items',JSON.stringify(items));
+    //Update the UI
+    populateList(items, itemsList);
+  }
+
+  addItems.addEventListener('submit', addItem);
+  itemsList.addEventListener('click', toggleDone);
+
+  populateList(items, itemsList);
 
 </script>
 
