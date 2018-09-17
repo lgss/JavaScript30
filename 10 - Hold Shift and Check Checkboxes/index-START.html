@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Hold Shift to Check Multiple Checkboxes</title>
 </head>
+
 <body>
   <style>
 
@@ -53,7 +55,7 @@
 
 
   </style>
-   <!--
+  <!--
    The following is a common layout you would see in an email client.
 
    When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
@@ -98,7 +100,35 @@
     </div>
   </div>
 
-<script>
-</script>
+  <script>
+    const checkboxes = document.querySelectorAll(".inbox input[type='checkbox']");
+    console.table(checkboxes);
+
+    let lastChecked;
+
+function boxChecked(e) {
+
+  let between = false;
+  if (e.shiftKey && this.checked) {
+
+    checkboxes.forEach(checkbox => {
+      console.log(checkbox);
+      if (checkbox === this || checkbox === lastChecked) {
+        between = !between;
+        console.log('Starting to check them inbetween!');
+      }
+
+      if (between) {
+        checkbox.checked = true;
+      }
+    });
+  }
+
+  lastChecked = this;
+}
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', boxChecked));
+
+  </script>
 </body>
+
 </html>
