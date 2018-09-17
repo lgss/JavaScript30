@@ -7,6 +7,17 @@
 </head>
 <body>
 <script>
+  const pressed = [];
+  const secretcode = 'jamespickett'
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key);
+    pressed.splice(-secretcode.length - 1, pressed.length - secretcode.length)
+    
+    if (pressed.join('') == secretcode){
+      console.log('yay');
+    } 
+      
+  });
 </script>
 </body>
 </html>
