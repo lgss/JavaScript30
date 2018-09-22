@@ -22,7 +22,14 @@
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
+    <br><br>
+      
+      <input type="button" value="Clear List" id="clearListButton">
+      <input type="button" value="Check All" id="checkAllButton">
+      <input type="button" value="Uncheck All" id="uncheckAllButton">
+      
     </form>
+    
   </div>
 
 <script>
@@ -68,6 +75,36 @@ itemsList.addEventListener('click', toggleDone);
     //populateList
     
   }
+
+  function clearList(){
+    //console.log('clear list');
+    items.length = 0;
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
+  function checkAll(){
+    //console.log('check all');
+    items.forEach(i => {
+      i.done = true;
+    });
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
+  function uncheckAll(){
+    //console.log('uncheck all');
+    items.forEach(i => {
+      i.done = false;
+    });
+    populateList(items, itemsList);
+    localStorage.setItem('items', JSON.stringify(items));
+  }
+
+  addItems.querySelector('#clearListButton').addEventListener('click', clearList);
+  addItems.querySelector('#checkAllButton').addEventListener('click', checkAll);
+  addItems.querySelector('#uncheckAllButton').addEventListener('click', uncheckAll);
+  
 
   populateList(items, itemsList);
 
