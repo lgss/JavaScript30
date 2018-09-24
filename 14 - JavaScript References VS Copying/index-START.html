@@ -9,14 +9,28 @@
   <script>
     // start with strings, numbers and booleans
 
+    let string1 = "Hello";
+    let string2 = string1;
+    console.log(string1, string2);
+    string1 = 'HELLO'
+    console.log(string1, string2);
+    string2 = 'WORLD'
+    console.log(string1, string2);
+
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
+    let players2 = players;
+    console.log(players2);
 
     // You might think we can just do something like this:
 
     // however what happens when we update that array?
+
+    players2[0] = 'Stuart';
+    console.log(players);
+    console.log(players2);
 
     // now here is the problem!
 
@@ -27,10 +41,17 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    
+    let players3 = players.slice()          //Should work with NodeLists too
+    let players4 = Array.from(players);
 
     // or create a new array and concat the old one in
+    
+    let players5 = [].concat(players);      //I don't like this...
 
     // or use the new ES6 Spread
+
+    let players6 = [...players];            //Works well but feels dirtier
 
     // now when we update it, the original one isn't changed
 
@@ -44,11 +65,39 @@
 
     // and think we make a copy:
 
+    const person2 = person;
+
     // how do we take a copy instead?
+
+    const person3 = Object.assign({}, person, { number:99, age:100 });
+
+    console.clear();
 
     // We will hopefully soon see the object ...spread
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+
+    function DeepClone(obj) {
+      let newObj = Object.assign({} , obj, {})
+      for ( var key in newObj ) {
+        newObj[key] === Object(newObj[key]) ? newObj[key] = DeepClone(obj[key]) : null
+      }
+      return newObj
+    }
+
+    const book = {
+      title: 'The Colour of Magic',
+      author: {
+        forename: 'Terry',
+        surname: 'Prachett'
+      }
+    }
+    
+    const book2 = DeepClone(book);
+    book2.author.surname = 'Pratchett'
+
+    console.log(book.author);
+    console.log(book2.author);
 
   </script>
 
