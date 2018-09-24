@@ -55,8 +55,9 @@
       rootMargin: '0px',
       threshold: [0.1,0.5]
     } 
-    var observer = new c(handleIntersect,observerOptions)
+    var observer = new IntersectionObserver(handleIntersect,observerOptions)
     images.forEach(image => observer.observe(image))
+    
   </script>
 
   <style>
