@@ -45,6 +45,14 @@
 
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const bandList = document.querySelector('#bands')
+
+const sortedBands = bands
+  .map(band => [band.replace(/^(?:(The |A |An )+)/,''),band])              //Makes a tuple of [stripped name, original name]
+  .sort(([a],[b]) => a.localeCompare(b))                                   //Sort by stripped name
+  .map( band => band[1])                                                   //pull the original name out of the tuple and drop the stripped name
+bandList.innerHTML = sortedBands.map((band) => {return `<li>${band}</li>`}).join('');
+//bands.sort()
 
 
 </script>
