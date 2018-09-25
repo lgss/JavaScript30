@@ -182,6 +182,15 @@
     </li>
   </ul>
 <script>
+
+let videos = [...document.querySelectorAll('.videos li')]
+time = videos.map(video => video.dataset.time.split(':'))
+  .map(timeArray => parseInt(timeArray[0])*60 + parseInt(timeArray[1]))
+  .reduce((t,seconds) => t + seconds)
+
+let date = new Date(time * 1000).toISOString().substr(11, 8)
+console.log(date)
+
 </script>
 </body>
 </html>
