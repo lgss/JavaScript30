@@ -35,6 +35,29 @@
   </style>
 
 <script>
+canvas = document.querySelector('.hero')
+text   = canvas.querySelector('h1')
+
+function shadow(e) {
+  const { offsetWidth: width, offsetHeight: height } = canvas;
+  let { offsetX: x, offsetY: y } = e;
+  if (e.target !== this ) {
+    x += e.target.offsetLeft;
+    y += e.target.offsetTop;
+  };
+  let [ dx, dy ]= [ Math.round(100 * x / width - 50), Math.round(100 * y / height - 50) ];
+  text.style.textShadow = `
+    ${dx}px ${dy}px 0 red,
+    ${-dx}px ${-dy}px 0 yellow,
+    ${dy}px ${dx}px 0 green,
+    ${-dy}px ${-dx}px 0 blue
+  `
+  console.log(dx,dy)
+
+}
+
+canvas.addEventListener('mousemove', shadow)
+
 </script>
 </body>
 </html>
