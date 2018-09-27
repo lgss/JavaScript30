@@ -10,7 +10,7 @@
   <div class="photobooth">
     <div class="controls">
       <button onClick="takePhoto()">Take Photo</button>
-<!--       <div class="rgb">
+      <div class="rgb">
         <label for="rmin">Red Min:</label>
         <input type="range" min=0 max=255 name="rmin">
         <label for="rmax">Red Max:</label>
@@ -29,7 +29,30 @@
         <input type="range" min=0 max=255 name="bmin">
         <label for="bmax">Blue Max:</label>
         <input type="range" min=0 max=255 name="bmax">
-      </div> -->
+      </div>
+
+      <div class="hue">
+          <h1>Hue</h1>
+          <label for="rhue">R:</label>
+          <input id="rhue" type="range" value=0 min=-255 max=255 name="rhue">
+          <br>
+          <label for="ghue">G:</label>
+          <input id="ghue" type="range" value=0 min=-255 max=255 name="ghue">
+          <br>  
+          <label for="bhue">B:</label>
+          <input id="bhue" type="range" value=0 min=-255 max=255 name="bhue">
+      </div>
+      <div class="split">
+          <h1>Split</h1>
+          <label for="rsplit">R:</label>
+          <input id="rsplit" type="range" value=0 min=-640 max=640 name="rsplit">
+          <br>
+          <label for="gsplit">G:</label>
+          <input id="gsplit" type="range" value=0 min=-640 max=640 name="gsplit">
+          <br>  
+          <label for="bsplit">B:</label>
+          <input id="bsplit" type="range" value=0 min=-640 max=640 name="bsplit">
+      </div>
     </div>
 
     <canvas class="photo"></canvas>
