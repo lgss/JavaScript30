@@ -37,12 +37,9 @@
     function highlightLink() {
       currentHighlight = this;
       const linkCoords = this.getBoundingClientRect();
-      console.log(linkCoords)
-      console.log(this.offsetTop)
       highlight.style.width = `${linkCoords.width}px`
       highlight.style.height = `${linkCoords.height}px`
-      highlight.offsetTop = this.offsetTop
-      //highlight.style.transform = `translate(${linkCoords.x+window.scrollX}px,${linkCoords.y+window.scrollY}px)`
+      highlight.style.transform = `translate(${linkCoords.x+window.scrollX}px,${linkCoords.y+window.scrollY}px)`
     }
 
     triggers.forEach(trigger => trigger.addEventListener('mouseenter',highlightLink))
