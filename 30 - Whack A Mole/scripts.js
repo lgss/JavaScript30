@@ -16,7 +16,6 @@ function popMole(hole,duration){
 }
 
 function moleRandomiser() {
-    console.log("moooles")
     //does a mole pop
     if (Math.random() > 0.8) { return }
 
@@ -44,13 +43,19 @@ function startGame() {
     score = 0
     scoreBoard.textContent = score
     //set game parameters
+
     let gameTime  = 10000
     const moleDelay = 500
+
+    //start randomiser
     const session = setInterval(
         ()=>{
+            //decrement game timer
             gameTime -= moleDelay
+            //chance to spawn a mole
             moleRandomiser()
-            gameTime <= 0 ? clearInterval(session) : console.log(gameTime)
+            //end session if timer elapsed
+            gameTime <= 0 ? clearInterval(session) : null
         },
         moleDelay
     )
